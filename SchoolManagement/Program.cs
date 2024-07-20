@@ -6,6 +6,7 @@ using SchoolManagement.Abstraction.Repositories.StudentRepository;
 using SchoolManagement.Abstraction.Services;
 using SchoolManagement.Context;
 using SchoolManagement.Entities.Identity;
+using SchoolManagement.Extentions;
 using SchoolManagement.Implementation;
 using SchoolManagement.Implementation.Repositories.EntitiesRepositories;
 using SchoolManagement.Implementation.Service;
@@ -35,6 +36,8 @@ builder.Services.AddAutoMapper(typeof(MapperProfile));
 //services
 builder.Services.AddScoped<ISchoolService, SchoolService>();
 builder.Services.AddScoped<IStudentService, StudentService>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IRoleService, RoleService>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 //repositories
@@ -55,6 +58,7 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.ConfigureExceptionHandler();
 app.MapControllers();
 
 app.Run();
